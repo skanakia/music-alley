@@ -1,0 +1,11 @@
+.main {
+    width: 800px;
+    height: 450px;
+    border-width: 5px;
+    border-color: black;
+    border-style: solid;
+    position: absolute;
+    right: 5%;
+    top: 10%;
+    background: white;
+}
