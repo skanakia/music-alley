@@ -1,12 +1,17 @@
 import "./main.css";
 import React, { Component } from 'react';
 import { ReactMic } from 'react-mic';
+import API from '../../utils/API'
 
 class main extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        record: false
+        record: false,
+        userid: 1,
+        id: 1,
+        blob: props.blob,
+        length: 10
       }
    
     }
@@ -21,10 +26,16 @@ class main extends Component {
       this.setState({
         record: false
       });
+
+      
+
     }
    
     onStop(recordedBlob) {
       console.log('recordedBlob is: ', recordedBlob);
+      // const userid = this.state.userid;
+      // const id = this.state.id;
+      API.createAudioFile(1, 1, recordedBlob);
     }
    
     render() {
