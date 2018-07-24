@@ -9,3 +9,8 @@
     top: 10%;
     background: white;
 }
+
+.sound-wave {
+    position:relative;
+    width: 100%;
+}
