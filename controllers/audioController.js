@@ -13,15 +13,12 @@ module.exports = {
         const savedAudio = {};
         savedAudio.project_id = req.params.id;
         savedAudio.uploader_id = req.params.userid;
-        savedAudio.file = req.body.blob;
-        savedAudio.length = req.body.length
+        savedAudio.file_url = req.body.blobURL;
         console.log(savedAudio);
         Files.create(savedAudio).then(function (doc) {
             console.log(doc);
             res.json(doc);
-        }).catch(function (err) {
-            res.json(err);
-        });
+        }).catch(err => res.status(422).json(err));
     },
     removeFile: function (req, res) {
         Files
