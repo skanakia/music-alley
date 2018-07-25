@@ -1,14 +1,17 @@
 import "./main.css";
 import React, { Component } from 'react';
 import { ReactMic } from 'react-mic';
-import Sidebar from "../sidebar"
+import API from '../../utils/API'
 
 class main extends Component {
     constructor(props) {
       super(props);
       this.state = {
         record: false,
-        recordedBlob: ""
+        userid: 1,
+        id: 1,
+        blob: props.blob,
+        length: 10
       }
    
     }
@@ -23,14 +26,16 @@ class main extends Component {
       this.setState({
         record: false
       });
+
+      
+
     }
    
     onStop(recordedBlob) {
       console.log('recordedBlob is: ', recordedBlob);
-      var x = document.getElementById("playback");
-      x.src = recordedBlob.blobURL;
-      x.type = "audio/webm";
-      console.log(x);
+      // const userid = this.state.userid;
+      // const id = this.state.id;
+      API.createAudioFile(1, 1, recordedBlob);
     }
    
     render() {
