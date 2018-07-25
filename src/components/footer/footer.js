@@ -3,7 +3,7 @@ import "./footer.css";
 
 const footer = props => (
     <footer className="footer">
-        loreum
+        MIT
     </footer>
 )
 
