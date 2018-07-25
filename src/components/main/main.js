@@ -1,7 +1,11 @@
 import "./main.css";
 import React, { Component } from 'react';
 import { ReactMic } from 'react-mic';
-import API from '../../utils/API'
+import API from '../../utils/API';
+import {Howl, Howler} from 'howler';
+
+let userid;
+let id;
 
 class main extends Component {
     constructor(props) {
@@ -10,10 +14,11 @@ class main extends Component {
         record: false,
         userid: 1,
         id: 1,
-        blob: props.blob,
-        length: 10
+        blobURL: props.blobURL
       }
    
+      userid = this.state.userid;
+      id = this.state.id;
     }
    
     startRecording = () => {
@@ -26,20 +31,23 @@ class main extends Component {
       this.setState({
         record: false
       });
-
-      
-
     }
    
     onStop(recordedBlob) {
       console.log('recordedBlob is: ', recordedBlob);
-      // const userid = this.state.userid;
-      // const id = this.state.id;
-      API.createAudioFile(1, 1, recordedBlob);
+      API.createAudioFile(userid, id, recordedBlob);
+      const sound = new Howl({
+        src: [recordedBlob.blobURL],
+        format: ['webm']
+        }); 
+  
+        sound.play();
     }
+
    
     render() {
       return (
+        
         <p className="main">
           <ReactMic
             record={this.state.record}
