@@ -5,6 +5,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "howler": "^2.0.14",
+    "mongoose": "^5.2.5",
+    "mongoose-file": "0.0.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-howler": "^3.7.3",
@@ -13,10 +15,14 @@
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "seed": "node scripts/seedDB.js",
+    "install": "cd client && yarn install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "server.js",

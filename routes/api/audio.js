@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const audioController = require("../../controllers/audioController");
 
-// Matches with "/api/books"
+// Matches with "audio/api/:userid/:id"
 router.route("/:userid/:id")
   .post(audioController.saveAudio);
 
