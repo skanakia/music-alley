@@ -6,11 +6,26 @@
     border-style: solid;
     position: absolute;
     right: 5%;
-    top: 10%;
+    top: 15%;
     background: white;
 }
 
 .sound-wave {
     position:relative;
     width: 100%;
+    height: 200px;
+}
+
+#player {
+    float: right;
+    margin: 10px;
+}
+
+#startb {
+    margin: 10px;
+    background: black;
+}
+
+#stopb {
+    margin: 10px;
 }

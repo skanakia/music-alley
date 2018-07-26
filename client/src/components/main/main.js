@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { ReactMic } from 'react-mic';
 import API from '../../utils/API';
 import {Howl, Howler} from 'howler';
+// import ReactPlayer from 'react-player';
 
 let userid;
 let id;
@@ -33,22 +34,26 @@ class main extends Component {
       });
     }
    
-    onStop(recordedBlob) {
+    onStop = recordedBlob => {
       console.log('recordedBlob is: ', recordedBlob);
       API.createAudioFile(userid, id, recordedBlob);
-      const sound = new Howl({
-        src: [recordedBlob.blobURL],
-        format: ['webm']
-        }); 
-  
-        sound.play();
+      
+        const object = this.refs.Progress1;
+        object.src = recordedBlob.blobURL; 
+      
+      // const sound = new Howl({
+      //   src: [recordedBlob.blobURL],
+      //   format: ['webm']
+      //   }); 
+        // sound.play();
+
     }
 
    
     render() {
       return (
         
-        <p className="main">
+        <div className="main">
           <ReactMic
             record={this.state.record}
             className="sound-wave"
@@ -56,12 +61,10 @@ class main extends Component {
             strokeColor="#000000"
             backgroundColor="#FF4081"
             />
-            <button className="startb" onClick={this.startRecording} type="button">Start Recording</button>
-            <button className="stopb" onClick={this.stopRecording} type="button">Stop</button>
-            <video controls name="media">
-            <source id="playback"></source>
-            </video>
-          </p>
+            <button id="startb" className="btn btn-primary" onClick={this.startRecording} type="button">Start Recording</button>
+            <button id="stopb" className="btn btn-danger" onClick={this.stopRecording} type="button">Stop</button>
+            <audio id="player" ref="Progress1" video controls="controls" type="video/webm"></audio>
+          </div>
       );
     }
   }

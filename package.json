@@ -12,6 +12,7 @@
     "react-dom": "^16.4.1",
     "react-howler": "^3.7.3",
     "react-mic": "^11.0.0",
+    "react-player": "^1.6.4",
     "react-recorder": "^1.0.0",
     "react-scripts": "1.1.4"
   },
