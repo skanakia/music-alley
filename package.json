@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "concurrently": "^3.6.1",
     "howler": "^2.0.14",
     "mongoose": "^5.2.5",
     "mongoose-file": "0.0.2",
