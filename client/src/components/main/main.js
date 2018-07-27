@@ -4,6 +4,8 @@ import { ReactMic } from 'react-mic';
 import API from '../../utils/API';
 import {Howl, Howler} from 'howler';
 // import ReactPlayer from 'react-player';
+import Audio from '../audio';
+import Sidebar from '../sidebar';
 
 let userid;
 let id;
@@ -39,14 +41,16 @@ class main extends Component {
       API.createAudioFile(userid, id, recordedBlob);
       
         const object = this.refs.Progress1;
-        object.src = recordedBlob.blobURL; 
-      
+        object.src = recordedBlob.blobURL;
+        
+      <Audio
+      src = {recordedBlob.blobURL}
+      />
       // const sound = new Howl({
       //   src: [recordedBlob.blobURL],
       //   format: ['webm']
       //   }); 
         // sound.play();
-
     }
 
    

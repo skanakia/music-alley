@@ -3,11 +3,21 @@ import React, { Component } from 'react';
 import Main from "../main";
 import Sidebar from "../sidebar";
 
-const audio = () => (
-    <audio controls="controls">
-    <source src= { this.props.recordedBlob.blobURL } type="audio/mp3"></source>
-    </audio>
-)
+class audio extends Component {
+    constructor(props) {
+        super(props);
+    this.state = {
+        src: this.props.src,
+      };
+    }
+      render() {
+        return (
+            // {this.state.map(src => (
+    <audio id="player" src = {this.state.src} video controls="controls" type="video/webm"></audio>
+            // ))}
+        )
+    }
+}
 
 
 export default audio;
