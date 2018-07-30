@@ -9,5 +9,12 @@ export default {
     },
     deleteFile: function(id) {
         return axios.delete("/api/audio/" + id);
+    },
+    createNewUser: function(user) {
+        return axios.post("http://localhost:3001/api/audio/user", user, { crossDomain: true });
+    },
+    login: function(user, password) {
+        return axios.post("http://localhost:3001/api/audio/user/login", {"username": user, "password": password}, { crossDomain: true })
     }
+
 };

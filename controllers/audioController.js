@@ -1,5 +1,6 @@
 const Files = require("../models/file");
 const User = require("../models/user");
+const passport = require("../passport");
 
 // Defining methods for the booksController
 module.exports = {
@@ -26,6 +27,40 @@ module.exports = {
             .then(dbModel => dbModel.remove())
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+    createUser: function (req, res) {
+        User
+            .findOne({ username: req.username })
+            .then(user => {
+                console.log(user)
+                if (user) {
+                    console.log("Username Taken!!!!")
+                    res.json({
+                        error: `Sorry, already a user with the username: ${username}`
+                    });
+                } else {
+                    const newUser = new User({
+                        username: req.user.username,
+                        password: req.user.password
+                    })
+                    newUser.save((err, savedUser) => {
+                        if (err) return res.json(err)
+                        console.log(savedUser);
+                        res.json(savedUser);
+                    })
+                }
+            })
+            .catch(err => res.status(422).json(err));
+    },
+    login: function(req, res) {
+        passport.authenticate('local', function(err, response) {
+            if (err) throw err;
+            console.log('logged in', req.user);
+            var userInfo = {
+                username: req.user.username
+            };
+            console.log("USER INFO: ", userInfo)
+            res.json(userInfo);
+        });
     }
-
 };
