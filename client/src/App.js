@@ -1,25 +1,86 @@
 import React, { Component } from 'react';
-import './App.css';
-import Main from "./components/main";
-import Sidebar from "./components/sidebar";
-import Footer from "./components/footer";
-import Body from "./components/body";
-import Logo from "./components/logo";
-
+import axios from 'axios'
+import { Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+// components
+import Signup from './pages/Signup'
+import LoginForm from './pages/Login'
+import Navbar from './components/navbar'
+import Home from './pages/Home'
+import MusicMain from './pages/MusicMain'
 
 class App extends Component {
-    
-    render() {
-      return (
-        <div>
-          <Body />
-          <Logo />
-          <Sidebar />
-          <Main />
-          <Footer />
-        </div>
-      );
+  constructor() {
+    super()
+    this.state = {
+      loggedIn: false,
+      username: null
     }
+
+    this.getUser = this.getUser.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this)
+    this.updateUser = this.updateUser.bind(this)
   }
 
-  export default App;
+  componentDidMount() {
+    this.getUser()
+  }
+
+  updateUser(userObject) {
+    this.setState(userObject)
+  }
+
+  getUser() {
+    axios.get('/user/').then(response => {
+      console.log('Get user response: ')
+      console.log(response.data)
+      if (response.data.user) {
+        console.log('Get User: There is a user saved in the server session: ')
+
+        this.setState({
+          loggedIn: true,
+          username: response.data.user.username
+        })
+      } else {
+        console.log('Get user: no user');
+        this.setState({
+          loggedIn: false,
+          username: null
+        })
+      }
+    })
+  }
+
+  render() {
+
+    const loginStat = this.state.loggedIn
+
+    return (
+      <div>
+        {/* Routes to different components */}
+        <Router>
+          <div>
+          <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+            <Route
+              exact path="/"
+              // component={Home}
+            render={() =>
+              loginStat ?  (<Route component={MusicMain} />) :  (<Route component= {Home} /> ) }
+            />
+            <Route
+              path="/login"
+              component={LoginForm}
+            />
+
+            <Route
+              path="/signup"
+              component={Signup}
+            />
+          </div>
+          </Router>
+      </div>
+    );
+  }
+}
+
+export default App;

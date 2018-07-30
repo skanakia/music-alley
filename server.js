@@ -2,16 +2,17 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const routes = require("./routes");
+// const dbConnection = require('./database');
+const cookieSession = require('cookie-session');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+// import MongoStore from 'connect-mongo';
+const passport = require('./passport');
 const app = express();
+var cors = require('cors');
 const PORT = process.env.PORT || 3001;
 
-// Define middleware here
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+app.use(cors());
 
 app.use(function (req, res, next) {
 
@@ -33,13 +34,37 @@ app.use(function (req, res, next) {
 });
 
 
+// Connect to the Mongo DB
+const dbConnection = mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/musicbase"
+);
+
+
+// // Sessions
+app.use(
+	session({
+		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		store: new MongoStore({mongooseConnection: dbConnection }),
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
+
+// // Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
+
+// Define middleware here
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 // Add routes, both API and view
 app.use(routes);
 
-// Connect to the Mongo DB
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/musicbase"
-);
 
 // Start the API server
 app.listen(PORT, function() {
