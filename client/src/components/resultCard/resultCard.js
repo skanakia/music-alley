@@ -16,7 +16,7 @@ class ResultCard extends Component {
         
         <div className="audio-file">
             {/* WORKING */}
-           <audio id="player" src={this.state.audio} ref="Progress1" video controls="controls" type="video/webm"></audio>
+           <audio id="player" src={this.state.audio} ref="Progress1" video controls="controls" type="audio/webm"></audio>
         </div>
       );
     }

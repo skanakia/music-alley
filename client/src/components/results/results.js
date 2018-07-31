@@ -36,8 +36,9 @@ class Results extends Component {
 
             <div className="audio-result">
                 <Wrapper>
-                    {this.state.recordings.forEach(element => (
+                    {this.state.recordings.map(element => (
                         <ResultCard
+                            key={element._id}
                             id={this.state.id}
                             audio={element.file_url}
                         />
