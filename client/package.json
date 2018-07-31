@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.283.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-mic": "^11.0.0",

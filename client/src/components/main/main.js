@@ -6,6 +6,7 @@ import {Howl, Howler} from 'howler';
 // import ReactPlayer from 'react-player';
 import Audio from '../audio';
 import Sidebar from '../sidebar';
+const AWS = require("aws-sdk")
 
 let userid;
 let id;
