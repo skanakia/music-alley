@@ -5,24 +5,33 @@ import Sidebar from "../../components/sidebar";
 import Footer from "../../components/footer";
 import Body from "../../components/body";
 import Logo from "../../components/logo";
-import Navbar from "../../components/navbar"
+import Results from '../../components/results';
 
 
 class Home extends Component {
-    
 
-
-    render() {
-      return (
-        <div>
-          <Body />
-          <Logo />
-          <Sidebar />
-          <Main />
-          <Footer />
-        </div>
-      );
+  constructor(props) {
+    super(props)
+    this.state = {
+      id: 1
     }
   }
 
-  export default Home;
+
+  
+
+  render() {
+    return (
+      <div>
+        <Body />
+        <Logo />
+        <Sidebar />
+        <Main />
+        <Results id={this.state.id}/>
+        <Footer />
+      </div>
+    );
+  }
+}
+
+export default Home;

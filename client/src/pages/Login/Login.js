@@ -13,7 +13,32 @@ class LoginForm extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-  
+
+    }
+
+    async getData() {
+        const userName = this.state.username
+        const passWord = this.state.password
+
+        const results = await axios.post("http://localhost:3001/api/audio/user/login", { username: userName, password: passWord }, { crossDomain: true })
+        return await results.json()
+            .then(response => {
+                console.log(response.data);
+                if (response.status === 200) {
+                    console.log(response.data);
+                    // this.props.updateUser({
+                    //     loggedIn: true,
+                    //     username: response.data.username
+                    // });
+                    this.setState({
+                        redirectTo: '/'
+                    });
+                    console.log(this.state);
+                }
+            }).catch(error => {
+                console.log('login error:')
+                console.log(error);
+            })
     }
 
     handleChange(event) {
@@ -22,26 +47,35 @@ class LoginForm extends Component {
         })
     }
 
+
     handleSubmit(event) {
         event.preventDefault()
         console.log('handleSubmit')
 
-        API.login(this.state.username, this.state.password).then(response => {
+        // API.login(this.state)
+        const userName = this.state.username
+        const passWord = this.state.password
+
+        axios.post("http://localhost:3001/api/audio/user/login", { username: userName, password: passWord }, { crossDomain: true }).then(response => {
+            // console.log(response.data);
             if (response.status === 200) {
-                this.props.updateUser({
-                    loggedIn: true,
-                    username: response.data.username
-                });
+                console.log(response.data);
+                // this.props.updateUser({
+                //     loggedIn: true,
+                //     username: response.data.username
+                // });
                 this.setState({
                     redirectTo: '/'
                 });
                 console.log(this.state);
             }
-        }). catch(error => {
+        }).catch(error => {
             console.log('login error:')
             console.log(error);
-        })
+        });
     }
+
+    // this.getData();
 
     render() {
         if (this.state.redirectTo) {
@@ -84,7 +118,7 @@ class LoginForm extends Component {
                             <div className="col-7"></div>
                             <button
                                 className="btn btn-primary col-1 col-mr-auto"
-                               
+
                                 onClick={this.handleSubmit}
                                 type="submit">Login</button>
                         </div>
