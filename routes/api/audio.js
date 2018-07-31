@@ -12,6 +12,15 @@ function getCurrentUser(request, response) {
 router
   .route('/user')
   .post(audioController.createUser)
+  .get((req, res, next) => {
+    console.log('===== user!!======')
+    console.log(req.user)
+    if (req.user) {
+      res.json({ user: req.user })
+    } else {
+      res.json({ user: null })
+    }
+  })
 
 router
   .route("/user/login")
@@ -22,14 +31,14 @@ router
       })
     } else {
       const usercase = req.user
-      req.logIn(req.user, function(err) {
+      req.logIn(req.user, function (err) {
         if (err) { return next(err); }
         return res.redirect('../user/login/' + req.user.username);
       });
       // console.log(JSON.parse(JSON.stringify({"username": res.req.user.username})));
       // return res.status(200).send(usercase);
       // next()
-    // console.log(currentUser);
+      // console.log(currentUser);
     }
   })
 
@@ -37,7 +46,7 @@ router
   .route("/user/login/:username")
   .get(function (req, res) {
     const user = req.params.username;
-    res.json({username: user});
+    res.json({ username: user });
   })
 
 // (req, res) => {
@@ -67,11 +76,12 @@ router.get('/user', (req, res, next) => {
 
 router.post('/user/logout', (req, res) => {
   if (req.user) {
-    req.logout()
-    res.send({ msg: 'logging out' })
-  } else {
-    res.send({ msg: 'no user to log out' })
-  }
+		req.session.destroy()
+		res.clearCookie('connect.sid') // clean up!
+		return res.json({ msg: 'logging you out' })
+	} else {
+		return res.json({ msg: 'no user to log out!' })
+	}
 })
 
 

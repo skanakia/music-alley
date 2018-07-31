@@ -60,10 +60,10 @@ class LoginForm extends Component {
             // console.log(response.data);
             if (response.status === 200) {
                 console.log(response.data);
-                // this.props.updateUser({
-                //     loggedIn: true,
-                //     username: response.data.username
-                // });
+                this.props.updateUser({
+                    loggedIn: true,
+                    username: response.data.username
+                });
                 this.setState({
                     redirectTo: '/'
                 });
