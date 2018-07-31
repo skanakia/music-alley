@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import API from '../../utils/API'
+import './SignUp.css'
 
 class Signup extends Component {
 	constructor() {
@@ -37,8 +38,12 @@ class Signup extends Component {
 
 render() {
 	return (
+		<div className="container">
+			<div className="row">
+                    <div className="col-md-4">
 		<div className="SignupForm">
-			<h4>Sign up</h4>
+			<h3>Sign up</h3>
+				<br></br>
 			<form className="form-horizontal">
 				<div className="form-group">
 					<div className="col-1 col-ml-auto">
@@ -79,7 +84,9 @@ render() {
 				</div>
 			</form>
 		</div>
-
+			</div>
+                </div>
+	</div>
 	)
 }
 }
