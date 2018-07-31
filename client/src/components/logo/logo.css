@@ -1,6 +1,8 @@
 .logo {
     color: white;
+    font-size: 40px;
     position: absolute;
     top: 2%;
     left: 45%;
+    font-family: 'Gloria Hallelujah', cursive;
 }

@@ -6,6 +6,10 @@ import API from "../../utils/API";
 import Main from "../main"
 import Audio from '../audio';
 
+const divStyle = {
+    listStyleType: "none"
+}
+
 class sidebar extends Component {
     constructor(props) {
         super(props);
@@ -19,8 +23,8 @@ render() {
     return (
 <div className="sidebar">
 
-    <h1>Playlist</h1>
-        <ul>
+    <h1 id="playlist">&nbsp;Playlist</h1>
+        <ul style={divStyle}>
         {x ? 
             this.state.src.map(src => (
             <li>

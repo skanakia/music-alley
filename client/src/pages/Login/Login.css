@@ -1,0 +1,31 @@
+h1 {
+    color: white;
+    font-size: 60px;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+h3 {
+    color: white;
+    font-size: 40px;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+.form-label {
+    color: white;
+    font-size: 20px;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+.form-input {
+    width: 80%;
+    font-size: 20px;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+button {
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+span {
+    font-size: 20px;
+}

@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import API from '../../utils/API'
+import './Login.css'
+
+var image = {
+    height: 420
+}
 
 class LoginForm extends Component {
     constructor() {
@@ -82,8 +87,13 @@ class LoginForm extends Component {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else {
             return (
-                <div>
-                    <h4>Login</h4>
+                <div className="container">
+                <div className="row">
+                    <div className="col-md-4">
+                    <h1>Music-Alley</h1>
+                    <br/>
+                    <h3>Login</h3>
+                    <br/>
                     <form className="form-horizontal">
                         <div className="form-group">
                             <div className="col-1 col-ml-auto">
@@ -117,12 +127,17 @@ class LoginForm extends Component {
                         <div className="form-group ">
                             <div className="col-7"></div>
                             <button
-                                className="btn btn-primary col-1 col-mr-auto"
+                                className="btn btn-warning col-1 col-mr-auto"
 
                                 onClick={this.handleSubmit}
-                                type="submit">Login</button>
+                                type="submit"><span>Login</span></button>
                         </div>
                     </form>
+                        </div>
+                        <div className="col-md-8">
+                            <img style={image} src='./images/rockout.jpg' />
+                        </div>
+                    </div>
                 </div>
             )
         }
