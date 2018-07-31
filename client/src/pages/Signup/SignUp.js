@@ -26,7 +26,9 @@ class Signup extends Component {
 		event.preventDefault()
 
         API.createNewUser(this.state).then(res => {
-            this.setState({redirectTo: '/login'})
+            if (res.status === 200) {
+            window.location = '/login';
+            }
         }).catch(err => {
             console.log(err);
         })

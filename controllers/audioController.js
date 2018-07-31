@@ -6,12 +6,12 @@ const passport = require("../passport");
 module.exports = {
     findAllByProject: function (req, res) {
         Files
-            .find({ project_id: req.project_id })
-            .then(dbModel => res.json(dbModel))
+            .find({ project_id: req.params.id })
+            .then(dbModel => res.send(dbModel))
             .catch(err => res.status(422).json(err));
     },
     saveAudio: function (req, res) {
-        const savedAudio = {};
+        let savedAudio = {};
         savedAudio.project_id = req.params.id;
         savedAudio.uploader_id = req.params.userid;
         savedAudio.file_url = req.body.blobURL;
@@ -30,7 +30,7 @@ module.exports = {
     },
     createUser: function (req, res) {
         User
-            .findOne({ username: req.username })
+            .findOne({ username: req.body.username })
             .then(user => {
                 console.log(user)
                 if (user) {
@@ -40,8 +40,8 @@ module.exports = {
                     });
                 } else {
                     const newUser = new User({
-                        username: req.user.username,
-                        password: req.user.password
+                        username: req.body.username,
+                        password: req.body.password
                     })
                     newUser.save((err, savedUser) => {
                         if (err) return res.json(err)
@@ -52,15 +52,20 @@ module.exports = {
             })
             .catch(err => res.status(422).json(err));
     },
-    login: function(req, res) {
-        passport.authenticate('local', function(err, response) {
+    login: passport.authenticate('local', {
+        failureFlash: true }, function(err, response) {
             if (err) throw err;
-            console.log('logged in', req.user);
-            var userInfo = {
-                username: req.user.username
-            };
-            console.log("USER INFO: ", userInfo)
-            res.json(userInfo);
-        });
-    }
+           var userAuth = {username: response.username}
+           console.log("Logged In", userAuth)
+            return (userAuth)
+        })
+        //  function(request, response, next) {
+        //     // if (err) throw err;
+        //     console.log('logged in', request.body.username);
+        //     var userInfo = {
+        //         username: request.body.username
+        //     };
+        //     console.log("USER INFO: ", userInfo)
+        //     res.json(userInfo);
+        // })
 };
