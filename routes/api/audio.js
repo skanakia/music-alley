@@ -22,11 +22,22 @@ router
       })
     } else {
       const usercase = req.user
-      console.log(JSON.parse(JSON.stringify({"username": res.req.user.username})));
-      return res.status(200).send(usercase);
-      next()
+      req.logIn(req.user, function(err) {
+        if (err) { return next(err); }
+        return res.redirect('../user/login/' + req.user.username);
+      });
+      // console.log(JSON.parse(JSON.stringify({"username": res.req.user.username})));
+      // return res.status(200).send(usercase);
+      // next()
     // console.log(currentUser);
     }
+  })
+
+router
+  .route("/user/login/:username")
+  .get(function (req, res) {
+    const user = req.params.username;
+    res.json({username: user});
   })
 
 // (req, res) => {
