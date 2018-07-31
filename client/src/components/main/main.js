@@ -6,7 +6,12 @@ import {Howl, Howler} from 'howler';
 // import ReactPlayer from 'react-player';
 import Audio from '../audio';
 import Sidebar from '../sidebar';
+<<<<<<< HEAD
 const AWS = require("aws-sdk")
+=======
+import AudioSpectrum from 'react-audio-spectrum';
+import ReactAudioPlayer from 'react-audio-player';
+>>>>>>> master
 
 let userid;
 let id;
@@ -18,7 +23,8 @@ class main extends Component {
         record: false,
         userid: 1,
         id: 1,
-        blobURL: props.blobURL
+        blobURL: props.blobURL,
+        src: ""
       }
    
       userid = this.state.userid;
@@ -41,12 +47,14 @@ class main extends Component {
       console.log('recordedBlob is: ', recordedBlob);
       API.createAudioFile(userid, id, recordedBlob);
       
-        const object = this.refs.Progress1;
-        object.src = recordedBlob.blobURL;
+        // const object = this.refs.Progress1;
+        // object.src = recordedBlob.blobURL;
+
+        this.setState({src: recordedBlob.blobURL});
         
-      <Audio
-      src = {recordedBlob.blobURL}
-      />
+      // <Audio
+      // src = {recordedBlob.blobURL}
+      // />
       // const sound = new Howl({
       //   src: [recordedBlob.blobURL],
       //   format: ['webm']
@@ -63,12 +71,34 @@ class main extends Component {
             record={this.state.record}
             className="sound-wave"
             onStop={this.onStop}
-            strokeColor="#000000"
-            backgroundColor="#FF4081"
+            strokeColor="#FFFFFF"
+            backgroundColor="#FF00FF"
             />
             <button id="startb" className="btn btn-primary" onClick={this.startRecording} type="button">Start Recording</button>
             <button id="stopb" className="btn btn-danger" onClick={this.stopRecording} type="button">Stop</button>
-            <audio id="player" ref="Progress1" video controls="controls" type="video/webm"></audio>
+            {/* <audio id="player" ref="Progress1" src={this.state.src} video controls="controls" type="video/webm"></audio> */}
+            <ReactAudioPlayer
+              src={this.state.src}
+              id="audio-element"
+              preload="true"
+              controls
+              />
+            <AudioSpectrum
+              id="audio-canvas"
+              height={165}
+              width={790}
+              audioId={'audio-element'}
+              capColor={'red'}
+              capHeight={2}
+              meterWidth={2}
+              meterCount={512}
+              meterColor={[
+              {stop: 0, color: '#f00'},
+              {stop: 0.5, color: '#0CD7FD'},
+              {stop: 1, color: 'red'}
+              ]}
+              gap={4}
+              />
           </div>
       );
     }

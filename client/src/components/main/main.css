@@ -8,6 +8,7 @@
     right: 5%;
     top: 15%;
     background: white;
+    font-family: 'Gloria Hallelujah', cursive;
 }
 
 .sound-wave {
@@ -16,7 +17,16 @@
     height: 200px;
 }
 
+#audio-canvas {
+    background: black;
+}
+
 #player {
+    float: right;
+    margin: 10px;
+}
+
+#audio-element {
     float: right;
     margin: 10px;
 }
