@@ -14,8 +14,8 @@ export default {
         return axios.post("/api/audio/user", user, { crossDomain: true });
     },
     login: function(user) {
-        console.log(axios.post("/api/audio/user/login", {"username": user.username, "password": user.password}, { crossDomain: true }));
-        return axios.post("/api/audio/user/login", {"username": user.username, "password": user.password}, { crossDomain: true })
+        // console.log(axios.post("/api/audio/user/login", {"username": user.username, "password": user.password}, { crossDomain: true }));
+        return axios.post("/api/audio/user/login", {"username": user.username, "password": user.password}, { crossDomain: false })
     }
 
 };

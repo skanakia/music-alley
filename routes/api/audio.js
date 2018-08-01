@@ -31,7 +31,7 @@ router
       const usercase = req.user
       req.logIn(req.user, function (err) {
         if (err) { return next(err); }
-        return res.redirect('../user/login/' + req.user.username);
+        return res.redirect('/user/login/' + req.user.username);
       });
       // console.log(JSON.parse(JSON.stringify({"username": res.req.user.username})));
       // return res.status(200).send(usercase);
