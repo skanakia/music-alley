@@ -10,17 +10,17 @@ import AudioSpectrum from 'react-audio-spectrum';
 import ReactAudioPlayer from 'react-audio-player';
 const AWS = require("aws-sdk");
 
-require('dotenv').config();
+// require('dotenv').config();
 
-const creds = new AWS.Credentials({
-  accessKeyId: process.env.AWSAccessKeyId, secretAccessKey: process.env.AWSSecretKey, sessionToken: null
-});
+// const creds = new AWS.Credentials({
+//   accessKeyId: process.env.AWSAccessKeyId, secretAccessKey: process.env.AWSSecretKey, sessionToken: null
+// });
 
-AWS.config.update({region: 'us-east-1', 
-  credentials: creds
-})
+// AWS.config.update({region: 'us-east-1', 
+//   credentials: creds
+// })
 
-const s3 = new AWS.S3({apiVersion: '2006-03-01'});
+// const s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
 let userid;
 let id;
