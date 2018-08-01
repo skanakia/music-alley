@@ -58,6 +58,11 @@ app.use(passport.session()) // calls the deserializeUser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Serve up static assets (usually on heroku)
+
+const routes = require("./routes");
+// Add routes, both API and view
+app.use(routes);
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get('*', (req, res) => {
@@ -65,9 +70,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const routes = require("./routes");
-// Add routes, both API and view
-app.use(routes);
+
 
 
 
