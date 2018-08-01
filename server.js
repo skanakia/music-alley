@@ -13,7 +13,7 @@ const app = express();
 var cors = require('cors');
 const PORT = process.env.PORT || 3001;
 
-// app.use(cors());
+app.use(cors());
 
 // app.use(function (req, res, next) {
 
