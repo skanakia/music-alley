@@ -8,6 +8,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 // import MongoStore from 'connect-mongo';
 const passport = require('./passport');
+const path = require('path');
 const app = express();
 var cors = require('cors');
 const PORT = process.env.PORT || 3001;
@@ -66,7 +67,7 @@ app.use(routes);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/index.html'));
+    res.sendFile(path.join(__dirname + 'client/build/index.html'));
   });
 }
 
