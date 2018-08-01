@@ -8,6 +8,19 @@ import Audio from '../audio';
 import Sidebar from '../sidebar';
 import AudioSpectrum from 'react-audio-spectrum';
 import ReactAudioPlayer from 'react-audio-player';
+const AWS = require("aws-sdk");
+
+require('dotenv').config();
+
+const creds = new AWS.Credentials({
+  accessKeyId: process.env.AWSAccessKeyId, secretAccessKey: process.env.AWSSecretKey, sessionToken: null
+});
+
+AWS.config.update({region: 'us-east-1', 
+  credentials: creds
+})
+
+const s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
 let userid;
 let id;
@@ -20,6 +33,7 @@ class main extends Component {
         userid: 1,
         id: 1,
         blobURL: props.blobURL,
+        blob: {},
         src: ""
       }
    
@@ -41,12 +55,37 @@ class main extends Component {
    
     onStop = recordedBlob => {
       console.log('recordedBlob is: ', recordedBlob);
+      
+      this.setState({src: recordedBlob.blobURL, blob: recordedBlob.blob});
+
+      // var file = new Buffer(this.state.blob);
+
+
+      // var params = { 
+      //   Body: recordedBlob.blob,
+      //   Bucket: 'arn:aws:s3:::music-alley-audio-files', 
+      //   Key: recordedBlob.blobURL,
+      //   ContentType: 'audio/wav',
+      //   ContentLength: recordedBlob.blob.size
+      // };
+      // return new Promise(function(resolve, reject) {
+      //   s3.upload(params, function(err, data) {
+      //     if(err) {
+      //       console.log(err); 
+      //       return reject(err);
+      //     } else {
+      //       console.log(data);
+      //       return resolve(data);
+      //     }
+      //   });
+      // });
+
       API.createAudioFile(userid, id, recordedBlob);
       
         // const object = this.refs.Progress1;
         // object.src = recordedBlob.blobURL;
 
-        this.setState({src: recordedBlob.blobURL});
+        
         
       // <Audio
       // src = {recordedBlob.blobURL}

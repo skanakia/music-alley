@@ -38,7 +38,7 @@ class Results extends Component {
                 <Wrapper>
                     {this.state.recordings.map(element => (
                         <ResultCard
-                            key={element._id}
+                            _id={element._id}
                             id={this.state.id}
                             audio={element.file_url}
                         />
