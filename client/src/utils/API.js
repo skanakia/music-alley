@@ -11,7 +11,7 @@ export default {
         return axios.delete("/api/audio/" + id);
     },
     createNewUser: function(user) {
-        return axios.post("/api/audio/user", user, { crossDomain: true });
+        return axios.post("/api/audio/user", user, { crossDomain: false });
     },
     login: function(user) {
         // console.log(axios.post("/api/audio/user/login", {"username": user.username, "password": user.password}, { crossDomain: true }));
