@@ -69,7 +69,7 @@ class App extends Component {
             />
             <Route
               path="/login"
-              component={LoginForm}
+              render={props => <LoginForm updateUser={this.updateUser} loggedIn= {this.state.loggedIn} />}
             />
 
             <Route
