@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const routes = require("./routes");
+
 // const dbConnection = require('./database');
 const cookieSession = require('cookie-session');
 const session = require('express-session');
@@ -62,9 +62,13 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+const routes = require("./routes");
 // Add routes, both API and view
 app.use(routes);
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+  });
 
 // Start the API server
 app.listen(PORT, function() {
