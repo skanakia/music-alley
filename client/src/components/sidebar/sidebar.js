@@ -25,16 +25,17 @@ render() {
 
     <h1 id="playlist">&nbsp;Playlist</h1>
         <ul style={divStyle}>
-        {x ? 
+        {/* {x ? 
             this.state.src.map(src => (
             <li>
             <Audio
+            key={src}
             src={src} />
             </li>
             ))
              : (
                 <h3>No Results to Display</h3>
-              )}
+              )} */}
         </ul>
             
     </div>

@@ -115,7 +115,7 @@ class main extends Component {
             <ReactAudioPlayer
               src={this.state.src}
               id="audio-element"
-              preload="true"
+              preload="auto"
               controls
               />
             <AudioSpectrum
