@@ -26,9 +26,7 @@ router
   .route("/user/login")
   .post(passport.authenticate('local'), (req, res, next) => {
     if (!req.user) {
-      return res.status(401).json({
-        message: 'Invalid username or password.'
-      })
+      return res.status(401)
     } else {
       const usercase = req.user
       req.logIn(req.user, function (err) {
