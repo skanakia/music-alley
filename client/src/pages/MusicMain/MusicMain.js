@@ -13,11 +13,20 @@ class MusicMain extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: 1
+      id: 1,
+      rec_play: false
     }
+    this.recordPlayAll = this.recordPlayAll.bind(this);
   }
 
 
+  recordPlayAll() {
+    this.setState({rec_play: true});
+  }
+
+  stopRecord() {
+    this.setState({rec_play: false});
+  }
   
 
   render() {
@@ -27,7 +36,7 @@ class MusicMain extends Component {
         <Logo />
         <Sidebar />
         <Main />
-        <Results id={this.state.id}/>
+        <Results id={this.state.id} onClick1={this.recordPlayAll} onClick2={this.stopRecord} rec_play_state={this.state.rec_play}/>
         <Footer />
       </div>
     );

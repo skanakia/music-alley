@@ -8,13 +8,22 @@ class ResultCard extends Component {
       this.state = {
         _id: props._id,
         proj_id: props.id,
-        audio: props.audio
+        audio: props.audio,
+        play_state: props.play_state
       }
 
       this.deleteAudio = this.deleteAudio.bind(this);
-
+      this.play = this.play.bind(this);
     }
    
+    componentWillReceiveProps() {
+      if (this.state.play_state === true) {
+        $('#player').play()
+      } else if (this.state.play_state === false) {
+        $('#player').stop()
+      }
+    }
+    
 
     deleteAudio() {
       console.log(this.state._id)

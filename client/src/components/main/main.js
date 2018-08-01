@@ -34,13 +34,22 @@ class main extends Component {
         id: 1,
         blobURL: props.blobURL,
         blob: {},
-        src: ""
+        src: "",
+        record_state: props.record_state
       }
    
       userid = this.state.userid;
       id = this.state.id;
     }
    
+    componentWillReceiveProps() {
+      if (this.state.record_state === true) {
+        rec.record()
+      } else if (this.state.record_state === false) {
+        rec.stop()
+      }
+    }
+
     startRecording = () => {
       this.setState({
         record: true

@@ -9,7 +9,8 @@ class Results extends Component {
         super(props);
         this.state = {
             id: props.id,
-            recordings: []
+            recordings: [],
+            rec_play_state: props.rec_play_state
         }
     }
 
@@ -35,12 +36,15 @@ class Results extends Component {
         return (
 
             <div className="audio-result">
+                <button className="record-play-all" onClick={props.onClick1}>Record/Play All</button>
+                <button className="Stop-recording" onClick={props.onClick2}>Stop Recording/Playing All</button>
                 <Wrapper>
                     {this.state.recordings.map(element => (
                         <ResultCard
                             _id={element._id}
                             id={this.state.id}
                             audio={element.file_url}
+                            play_state = {this.state.rec_play_state}
                         />
                         // <div>Hello</div>
                     ))}
