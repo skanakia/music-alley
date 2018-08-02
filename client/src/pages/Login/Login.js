@@ -25,15 +25,13 @@ class LoginForm extends Component {
         const userName = this.state.username
         const passWord = this.state.password
 
-        const results = await axios.post("http://localhost:3001/api/audio/user/login", { username: userName, password: passWord }, { crossDomain: true })
-        return await results.json()
-            .then(response => {
+     axios.post("http://localhost:3001/api/audio/user/login", { username: userName, password: passWord }, { crossDomain: true }).then(response => {
                 console.log(response.data);
                 if (response.status === 200) {
                     console.log(response.data);
                     this.props.updateUser({
                         loggedIn: true,
-                        username: response.data.username
+                        username: response.data.user
                     });
                     this.setState({
                         redirectTo: '/'
@@ -61,7 +59,7 @@ class LoginForm extends Component {
         const userName = this.state.username
         const passWord = this.state.password
 
-        axios.post("/api/audio/user/login", { username: userName, password: passWord }, { crossDomain: true }).then(response => {
+        axios.post("http://localhost:3001/api/audio/user/login", { username: userName, password: passWord }, { crossDomain: true }).then(response => {
             // console.log(response.data);
             if (response.status === 200) {
                 console.log(response.data);

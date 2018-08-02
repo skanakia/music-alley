@@ -14,7 +14,7 @@ module.exports = {
         let savedAudio = {};
         savedAudio.project_id = req.params.id;
         savedAudio.uploader_id = req.params.userid;
-        savedAudio.file_url = req.body.blobURL;
+        savedAudio.file_url = req.body.file_url;
         console.log(savedAudio);
         Files.create(savedAudio).then(function (doc) {
             console.log(doc);

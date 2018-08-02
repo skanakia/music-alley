@@ -8,13 +8,24 @@ class ResultCard extends Component {
       this.state = {
         _id: props._id,
         proj_id: props.id,
-        audio: props.audio
+        audio: props.audio,
+        play_state: props.play_state
       }
 
       this.deleteAudio = this.deleteAudio.bind(this);
-
+      // this.play = this.play.bind(this);
     }
    
+    componentWillReceiveProps() {
+      if (this.state.play_state === true) {
+          this.refs.Progress1.play()
+        // $('#player').play()
+      } else if (this.state.play_state === false) {
+        this.refs.Progress1.play()
+        // $('#player').stop()
+      }
+    }
+    
 
     deleteAudio() {
       console.log(this.state._id)
@@ -34,7 +45,7 @@ class ResultCard extends Component {
         
         <div className="audio-file">
             {/* WORKING */}
-           <audio id="player" src={this.state.audio} ref="Progress1" video controls="controls" type="audio/webm"></audio>
+           <audio id="player" src={this.state.audio} ref="Progress1" controls="controls" type="audio/wav"></audio>
            <button className="delete-button" onClick = {this.deleteAudio} id = {this.state._id}>Delete</button>
         </div>
       );
