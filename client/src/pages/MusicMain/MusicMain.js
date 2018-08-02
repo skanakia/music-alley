@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 // import './App.css';
-import Main from "../../components/main";
+import Maine2 from "../../components/maine2";
 import Sidebar from "../../components/sidebar";
 import Footer from "../../components/footer";
 import Body from "../../components/body";
 import Logo from "../../components/logo";
 import Results from '../../components/results';
+import "./MusicMain.css"
 
 
 class MusicMain extends Component {
@@ -17,17 +18,18 @@ class MusicMain extends Component {
       rec_play: false
     }
     this.recordPlayAll = this.recordPlayAll.bind(this);
+    this.stopRecord = this.stopRecord.bind(this);
   }
 
 
   recordPlayAll() {
-    this.setState({rec_play: true});
+    this.setState({ rec_play: true });
   }
 
   stopRecord() {
-    this.setState({rec_play: false});
+    this.setState({ rec_play: false });
   }
-  
+
 
   render() {
     return (
@@ -35,8 +37,10 @@ class MusicMain extends Component {
         <Body />
         <Logo />
         <Sidebar />
-        <Main />
-        <Results id={this.state.id} onClick1={this.recordPlayAll} onClick2={this.stopRecord} rec_play_state={this.state.rec_play}/>
+        <Maine2 record_state={this.state.rec_play}/>
+        <button className="record-play-all" onClick={this.recordPlayAll}>Record/Play All</button>
+        <button className="Stop-recording" onClick={this.stopRecord}>Stop Recording/Playing All</button>
+        <Results id={this.state.id} rec_play_state={this.state.rec_play} />
         <Footer />
       </div>
     );

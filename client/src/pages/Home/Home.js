@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import './App.css';
-import Main from "../../components/main";
+import Maine2 from "../../components/maine2";
 import Sidebar from "../../components/sidebar";
 import Footer from "../../components/footer";
 import Body from "../../components/body";
@@ -23,12 +23,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Body />
-        <Logo />
-        <Sidebar />
-        <Main />
-        <Results id={this.state.id}/>
-        <Footer />
+        Please Log-In to see more
       </div>
     );
   }

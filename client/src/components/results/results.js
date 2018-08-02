@@ -36,11 +36,10 @@ class Results extends Component {
         return (
 
             <div className="audio-result">
-                <button className="record-play-all" onClick={props.onClick1}>Record/Play All</button>
-                <button className="Stop-recording" onClick={props.onClick2}>Stop Recording/Playing All</button>
                 <Wrapper>
                     {this.state.recordings.map(element => (
                         <ResultCard
+                            key={element._id}
                             _id={element._id}
                             id={this.state.id}
                             audio={element.file_url}

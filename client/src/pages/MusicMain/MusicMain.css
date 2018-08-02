@@ -1,0 +1,14 @@
+.record-play-all {
+    position:absolute;
+    bottom: 30px;
+    right: 150px;
+    z-index: 6000;
+}
+
+.Stop-recording {
+    position:absolute;
+    bottom: 30px;
+    right: 20px;
+    z-index: 6000;
+
+}

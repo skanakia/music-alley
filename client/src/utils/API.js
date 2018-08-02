@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default {
-    createAudioFile: function (userid, id, file) {
-        return axios.post("http://localhost:3001/api/audio/" + userid + "/" + id, file, {crossOrigin: true});
+    createAudioFile: function (userid, id, file_url) {
+        return axios.post("http://localhost:3001/api/audio/" + userid + "/" + id, file_url, {crossOrigin: true});
     },
     getFilesByProject: function(id) {
         return axios.get("http://localhost:3001/api/audio/" + id, {crossOrigin: true});
